@@ -29,3 +29,17 @@ class AutoHealthJob:
     FORM_TEXT_ID = "office-form-question-textbox office-form-textfield-input form-control office-form-theme-focus-border border-no-radius"
     FORM_RADIO_ID = "office-form-question-choice-row office-form-question-choice-text-row"
     FORM_BUTTON_ID = "button-content"
+
+    def __init__(self, option=False):
+        self.state = False
+        if option:
+            self.options = webdriver.ChromeOptions()
+            self.options.add_argument("--headless")
+            self.options.add_argument('--disable-gpu')
+            self.driver = webdriver.Chrome(options=self.options)
+        else:
+            self.driver = webdriver.Chrome()
+
+        self.microsoft_login()
+        self.run()
+        self.driver.quit()

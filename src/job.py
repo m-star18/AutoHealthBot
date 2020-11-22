@@ -1,8 +1,10 @@
 import time
 import random
+import os
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from dotenv import load_dotenv
 import chromedriver_binary
 
 from src.const import (
@@ -32,6 +34,7 @@ class AutoHealthJob:
 
     def __init__(self, option=False):
         self.state = False
+        load_dotenv()
         if option:
             self.options = webdriver.ChromeOptions()
             self.options.add_argument("--headless")
@@ -62,21 +65,15 @@ class AutoHealthJob:
 
         # Enter your email address
         element = self.driver.find_element(By.ID, self.SIGN_IN_EMAIL_ID)
-        element.send_keys(MICROSOFT_EMAIL)
+        element.send_keys(os.environ['MICROSOFT_EMAIL'])
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
 
         # Enter your password
         element = self.driver.find_element(By.ID, self.SIGN_IN_PASSWORD_ID)
-        element.send_keys(MICROSOFT_PASSWORD)
+        element.send_keys(os.environ['MICROSOFT_PASSWORD'])
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
-
-        """
-        # Enter sign in state
-        self.driver.find_element(By.ID, self.SIGN_IN_STATE_ID).click()
-        self.get_time_sleep()
-        """
 
     def run(self):
         self.driver.get(MICROSOFT_FORM_URL)

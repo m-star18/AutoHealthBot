@@ -72,3 +72,18 @@ class AutoHealthJob:
         # Enter sign in state
         self.driver.find_element(By.ID, self.SIGN_IN_STATE_ID).click()
         time.sleep(self.TIME_SLEEP)
+
+    def run(self):
+        self.driver.get(MICROSOFT_FORM_URL)
+        time.sleep(self.TIME_SLEEP)
+
+        # Enter your temperature
+        element = self.driver.find_element(By.CLASS_NAME, self.FORM_TEXT_ID)
+        element.send_keys(get_temperature())
+
+        for state, element in zip(STATE_CONST, self.driver.find_elements(By.CLASS_NAME, self.FORM_RADIO_ID)):
+            element.send_keys(state)
+
+        self.driver.find_element(By.CLASS_NAME, self.FORM_BUTTON_ID).click()
+        time.sleep(self.TIME_SLEEP)
+        self.state = True

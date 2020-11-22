@@ -56,3 +56,9 @@ class AutoHealthJob:
 
         if self.driver.find_element(By.ID, self.ACCOUNT_CONTENT_ID):
             self.driver.find_element(By.ID, self.ACCOUNT_CONTENT_ID).click()
+
+        # Enter your email address
+        element = self.driver.find_element(By.ID, self.SIGN_IN_TEXT_ID)
+        element.send_keys(MICROSOFT_EMAIL)
+        self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
+        time.sleep(self.TIME_SLEEP)

@@ -7,8 +7,7 @@ from src.job import AutoHealthJob
 
 
 def main():
-    job = AutoHealthJob()
-    schedule.every().day.at(JOB_TIME).do(job)
+    schedule.every().day.at(JOB_TIME).do(AutoHealthJob)
 
     while True:
         schedule.run_pending()

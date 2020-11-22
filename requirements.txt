@@ -1,0 +1,5 @@
+schedule~=0.6.0
+pip~=9.0.1
+setuptools~=39.0.1
+chromedriver-binary~=87.0.4280.20.0
+selenium~=3.141.0

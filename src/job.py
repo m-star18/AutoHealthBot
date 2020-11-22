@@ -6,30 +6,29 @@ from selenium.webdriver.common.by import By
 import chromedriver_binary
 
 from src.const import (
-    MICROSOFT_EMAIL,
-    MICROSOFT_PASSWORD,
     MICROSOFT_LOGIN_URL,
     MICROSOFT_FORM_URL,
     MIN_TEMPERATURE,
     MAX_TEMPERATURE,
-    STATE_CONST,
 )
 
 
 def get_temperature():
-    return random.randint(MIN_TEMPERATURE, MAX_TEMPERATURE)
+    return str(random.uniform(MIN_TEMPERATURE, MAX_TEMPERATURE))[:4]
 
 
 class AutoHealthJob:
-    TIME_SLEEP = 10
+    TIME_SLEEP = 5
     ACCOUNT_CONTENT_ID = "otherTileText"
     SIGN_IN_EMAIL_ID = "i0116"
     SIGN_IN_PASSWORD_ID = "i0118"
     SIGN_IN_BUTTON_ID = "idSIButton9"
     SIGN_IN_STATE_ID = "idBtn_Back"
-    FORM_TEXT_ID = "office-form-question-textbox office-form-textfield-input form-control office-form-theme-focus-border border-no-radius"
-    FORM_RADIO_ID = "office-form-question-choice-row office-form-question-choice-text-row"
-    FORM_BUTTON_ID = "button-content"
+    FORM_TEXT_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div[2]/div/div/input'
+    FORM_2_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/input'
+    FORM_3_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input'
+    FORM_4_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input'
+    FORM_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[3]/div[1]/button/div'
 
     def __init__(self, option=False):
         self.state = False
@@ -43,6 +42,7 @@ class AutoHealthJob:
 
         self.microsoft_login()
         self.run()
+        self.get_screen_shot()
         self.driver.quit()
 
     def get_time_sleep(self):
@@ -50,8 +50,9 @@ class AutoHealthJob:
         time.sleep(self.TIME_SLEEP)
 
     def get_screen_shot(self):
-        width = self.driver.execute_script("return document.body.scrollWidth;")
-        height = self.driver.execute_script("return document.body.scrollHeight;")
+        self.driver.set_window_size(720, 1280)
+        width = self.driver.execute_script("return document.body.scrollWidth")
+        height = self.driver.execute_script("return document.body.scrollHeight")
         self.driver.set_window_size(width, height)
         self.driver.save_screenshot('screenshot-full.png')
 
@@ -82,12 +83,14 @@ class AutoHealthJob:
         self.get_time_sleep()
 
         # Enter your temperature
-        element = self.driver.find_element(By.CLASS_NAME, self.FORM_TEXT_ID)
+        element = self.driver.find_element(By.XPATH, self.FORM_TEXT_ID)
         element.send_keys(get_temperature())
 
-        for state, element in zip(STATE_CONST, self.driver.find_elements(By.CLASS_NAME, self.FORM_RADIO_ID)):
-            element.send_keys(state)
+        # Select Radio Button
+        self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_3_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_4_ID).click()
 
-        self.driver.find_element(By.CLASS_NAME, self.FORM_BUTTON_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
         self.get_time_sleep()
         self.state = True

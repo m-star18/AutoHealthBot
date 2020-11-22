@@ -68,3 +68,7 @@ class AutoHealthJob:
         element.send_keys(MICROSOFT_PASSWORD)
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         time.sleep(self.TIME_SLEEP)
+
+        # Enter sign in state
+        self.driver.find_element(By.ID, self.SIGN_IN_STATE_ID).click()
+        time.sleep(self.TIME_SLEEP)

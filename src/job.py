@@ -14,3 +14,7 @@ from src.const import (
     MAX_TEMPERATURE,
     STATE_CONST,
 )
+
+
+def get_temperature():
+    return random.randint(MIN_TEMPERATURE, MAX_TEMPERATURE)

@@ -18,3 +18,14 @@ from src.const import (
 
 def get_temperature():
     return random.randint(MIN_TEMPERATURE, MAX_TEMPERATURE)
+
+
+class AutoHealthJob:
+    TIME_SLEEP = 10
+    ACCOUNT_CONTENT_ID = "otherTileText"
+    SIGN_IN_TEXT_ID = "i0116"
+    SIGN_IN_BUTTON_ID = "idSIButton9"
+    SIGN_IN_STATE_ID = "idBtn_Back"
+    FORM_TEXT_ID = "office-form-question-textbox office-form-textfield-input form-control office-form-theme-focus-border border-no-radius"
+    FORM_RADIO_ID = "office-form-question-choice-row office-form-question-choice-text-row"
+    FORM_BUTTON_ID = "button-content"

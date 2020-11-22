@@ -43,3 +43,9 @@ class AutoHealthJob:
         self.microsoft_login()
         self.run()
         self.driver.quit()
+
+    def get_screen_shot(self):
+        width = self.driver.execute_script("return document.body.scrollWidth;")
+        height = self.driver.execute_script("return document.body.scrollHeight;")
+        self.driver.set_window_size(width, height)
+        self.driver.save_screenshot('screenshot-full.png')

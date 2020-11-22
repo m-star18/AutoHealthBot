@@ -49,3 +49,10 @@ class AutoHealthJob:
         height = self.driver.execute_script("return document.body.scrollHeight;")
         self.driver.set_window_size(width, height)
         self.driver.save_screenshot('screenshot-full.png')
+
+    def microsoft_login(self):
+        self.driver.get(MICROSOFT_LOGIN_URL)
+        time.sleep(self.TIME_SLEEP)
+
+        if self.driver.find_element(By.ID, self.ACCOUNT_CONTENT_ID):
+            self.driver.find_element(By.ID, self.ACCOUNT_CONTENT_ID).click()

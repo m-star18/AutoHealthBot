@@ -4,7 +4,6 @@ import os
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from dotenv import load_dotenv
 import chromedriver_binary
 
 from src.const import (
@@ -34,7 +33,6 @@ class AutoHealthJob:
 
     def __init__(self, option=False):
         self.state = False
-        load_dotenv()
         if option:
             self.options = webdriver.ChromeOptions()
             self.options.add_argument("--headless")

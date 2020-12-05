@@ -4,4 +4,4 @@ MICROSOFT_FORM_URL = "https://forms.office.com/Pages/ResponsePage.aspx?id=XYP-cp
 MIN_TEMPERATURE = 35.6
 MAX_TEMPERATURE = 36.5
 
-JOB_TIME = "06:00"
+JOB_TIME = "08:00"

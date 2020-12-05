@@ -4,6 +4,7 @@ import os
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from dotenv import load_dotenv
 import chromedriver_binary
 
 from src.const import (
@@ -29,11 +30,12 @@ class AutoHealthJob:
     FORM_2_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/input'
     FORM_3_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input'
     FORM_4_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input'
-    FORM_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[3]/div[1]/button/div'
+    FORM_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[4]/div[1]/button/div'
     MAIL_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[3]/div/div/label/input'
 
     def __init__(self, option=False):
         self.state = False
+        load_dotenv()
         if option:
             self.options = webdriver.ChromeOptions()
             self.options.add_argument("--headless")

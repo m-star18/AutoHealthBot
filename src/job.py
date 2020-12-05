@@ -30,6 +30,7 @@ class AutoHealthJob:
     FORM_3_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input'
     FORM_4_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input'
     FORM_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[3]/div[1]/button/div'
+    MAIL_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[3]/div/div/label/input'
 
     def __init__(self, option=False):
         self.state = False
@@ -85,6 +86,7 @@ class AutoHealthJob:
         self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_3_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_4_ID).click()
+        self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
 
         self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
         self.get_time_sleep()

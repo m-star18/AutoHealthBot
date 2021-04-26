@@ -105,8 +105,10 @@ class AutoHealthJob:
     def run_attend(self):
         # Select Radio Button
         self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
-        self.driver.find_element(By.XPATH, self.FORM_3_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_3_ATTEND_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_4_ID).click()
 
     def run_absent(self):
-
+        # Select Radio Button
+        self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_3_ABSENT_ID).click()

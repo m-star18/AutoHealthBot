@@ -34,7 +34,7 @@ class AutoHealthJob:
     FORM_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[4]/div[1]/button/div'
     MAIL_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[3]/div/div/label/input'
 
-    def __init__(self, option=False):
+    def __init__(self, option=False, attend=True):
         self.state = False
         if option:
             self.options = webdriver.ChromeOptions()
@@ -45,7 +45,8 @@ class AutoHealthJob:
             self.driver = webdriver.Chrome()
 
         self.microsoft_login()
-        self.run()
+        if attend:
+            self.run_attend()
         self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
         self.get_time_sleep()
@@ -87,7 +88,7 @@ class AutoHealthJob:
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
 
-    def run(self):
+    def run_attend(self):
         self.driver.get(MICROSOFT_FORM_URL)
         self.get_time_sleep()
 
@@ -99,8 +100,3 @@ class AutoHealthJob:
         self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_3_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_4_ID).click()
-        self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
-
-        self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
-        self.get_time_sleep()
-        self.state = True

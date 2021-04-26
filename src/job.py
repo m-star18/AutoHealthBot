@@ -9,6 +9,7 @@ import chromedriver_binary
 from src.const import (
     MICROSOFT_LOGIN_URL,
     MICROSOFT_FORM_URL,
+    MICROSOFT_EMAIL,
     MIN_TEMPERATURE,
     MAX_TEMPERATURE,
 )
@@ -64,7 +65,10 @@ class AutoHealthJob:
 
         # Enter your email address
         element = self.driver.find_element(By.ID, self.SIGN_IN_EMAIL_ID)
-        element.send_keys(os.environ['MICROSOFT_EMAIL'])
+        if os.environ['MICROSOFT_EMAIL'] is None:
+            element.send_keys(MICROSOFT_EMAIL)
+        else:
+            element.send_keys(os.environ['MICROSOFT_EMAIL'])
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
 

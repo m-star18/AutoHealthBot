@@ -47,6 +47,8 @@ class AutoHealthJob:
         self.microsoft_login()
         if attend:
             self.run_attend()
+        else:
+            self.run_absent()
         self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
         self.get_time_sleep()
@@ -100,3 +102,6 @@ class AutoHealthJob:
         self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_3_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_4_ID).click()
+
+    def run_absent(self):
+

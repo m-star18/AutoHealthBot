@@ -9,6 +9,8 @@ import chromedriver_binary
 from src.const import (
     MICROSOFT_LOGIN_URL,
     MICROSOFT_FORM_URL,
+    MICROSOFT_EMAIL,
+    MICROSOFT_PASSWORD,
     MIN_TEMPERATURE,
     MAX_TEMPERATURE,
 )
@@ -25,14 +27,15 @@ class AutoHealthJob:
     SIGN_IN_PASSWORD_ID = "i0118"
     SIGN_IN_BUTTON_ID = "idSIButton9"
     SIGN_IN_STATE_ID = "idBtn_Back"
-    FORM_TEXT_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div[2]/div/div/input'
-    FORM_2_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/input'
-    FORM_3_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input'
-    FORM_4_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input'
+    FORM_TEXT_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[1]/div/div[2]/div/div/input'
+    FORM_2_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[2]/div/div[2]/div/label/input'
+    FORM_3_ATTEND_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[3]/div/div[2]/div/div[1]/div/label/input'
+    FORM_3_ABSENT_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[3]/div/div[2]/div/div[2]/div/label/input'
+    FORM_4_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[4]/div/div[2]/div/div[2]/div/label/input'
     FORM_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[4]/div[1]/button/div'
     MAIL_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[3]/div/div/label/input'
 
-    def __init__(self, option=False):
+    def __init__(self, option=False, attend=True):
         self.state = False
         if option:
             self.options = webdriver.ChromeOptions()
@@ -43,7 +46,8 @@ class AutoHealthJob:
             self.driver = webdriver.Chrome()
 
         self.microsoft_login()
-        self.run()
+        self.run(attend)
+
         self.get_screen_shot()
         self.driver.quit()
 
@@ -64,17 +68,23 @@ class AutoHealthJob:
 
         # Enter your email address
         element = self.driver.find_element(By.ID, self.SIGN_IN_EMAIL_ID)
-        element.send_keys(os.environ['MICROSOFT_EMAIL'])
+        if MICROSOFT_EMAIL is None:
+            element.send_keys(os.environ['MICROSOFT_EMAIL'])
+        else:
+            element.send_keys(MICROSOFT_EMAIL)
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
 
         # Enter your password
         element = self.driver.find_element(By.ID, self.SIGN_IN_PASSWORD_ID)
-        element.send_keys(os.environ['MICROSOFT_PASSWORD'])
+        if MICROSOFT_PASSWORD is None:
+            element.send_keys(os.environ['MICROSOFT_PASSWORD'])
+        else:
+            element.send_keys(MICROSOFT_PASSWORD)
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
 
-    def run(self):
+    def run(self, attend):
         self.driver.get(MICROSOFT_FORM_URL)
         self.get_time_sleep()
 
@@ -82,12 +92,23 @@ class AutoHealthJob:
         element = self.driver.find_element(By.XPATH, self.FORM_TEXT_ID)
         element.send_keys(get_temperature())
 
-        # Select Radio Button
-        self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
-        self.driver.find_element(By.XPATH, self.FORM_3_ID).click()
-        self.driver.find_element(By.XPATH, self.FORM_4_ID).click()
-        self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
+        if attend:
+            self.run_attend()
+        else:
+            self.run_absent()
 
+        self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
         self.get_time_sleep()
         self.state = True
+
+    def run_attend(self):
+        # Select Radio Button
+        self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_3_ATTEND_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_4_ID).click()
+
+    def run_absent(self):
+        # Select Radio Button
+        self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_3_ABSENT_ID).click()

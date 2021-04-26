@@ -1,6 +1,6 @@
-schedule~=0.6.0
-setuptools~=50.3.2
-chromedriver-binary~=87.0.4280.20.0
+schedule~=1.1.0
+setuptools~=56.0.0
+chromedriver-binary~=88.0.4324.27
 selenium~=3.141.0
-pip~=20.3.1
-python-dotenv~=0.15.0
+pip~=21.1
+python-dotenv~=0.17.0

@@ -28,9 +28,10 @@ class AutoHealthJob:
     SIGN_IN_BUTTON_ID = "idSIButton9"
     SIGN_IN_STATE_ID = "idBtn_Back"
     FORM_TEXT_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[1]/div/div[2]/div/div/input'
-    FORM_2_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/input'
-    FORM_3_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input'
-    FORM_4_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input'
+    FORM_2_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[2]/div/div[2]/div/div[2]/div/label/input'
+    FORM_3_ATTEND_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[3]/div/div[2]/div/div[1]/div/label/input'
+    FORM_3_ABSENT_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[3]/div/div[2]/div/div[2]/div/label/input'
+    FORM_4_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[4]/div/div[2]/div/div[2]/div/label/input'
     FORM_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[4]/div[1]/button/div'
     MAIL_BUTTON_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[3]/div/div/label/input'
 

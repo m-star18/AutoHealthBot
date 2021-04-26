@@ -45,14 +45,7 @@ class AutoHealthJob:
             self.driver = webdriver.Chrome()
 
         self.microsoft_login()
-        if attend:
-            self.run_attend()
-        else:
-            self.run_absent()
-        self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
-        self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
-        self.get_time_sleep()
-        self.state = True
+        self.run(attend)
 
         self.get_screen_shot()
         self.driver.quit()
@@ -90,7 +83,7 @@ class AutoHealthJob:
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
 
-    def run_attend(self):
+    def run(self, attend):
         self.driver.get(MICROSOFT_FORM_URL)
         self.get_time_sleep()
 
@@ -98,6 +91,17 @@ class AutoHealthJob:
         element = self.driver.find_element(By.XPATH, self.FORM_TEXT_ID)
         element.send_keys(get_temperature())
 
+        if attend:
+            self.run_attend()
+        else:
+            self.run_absent()
+
+        self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
+        self.get_time_sleep()
+        self.state = True
+
+    def run_attend(self):
         # Select Radio Button
         self.driver.find_element(By.XPATH, self.FORM_2_ID).click()
         self.driver.find_element(By.XPATH, self.FORM_3_ID).click()

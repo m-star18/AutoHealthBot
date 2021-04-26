@@ -46,6 +46,11 @@ class AutoHealthJob:
 
         self.microsoft_login()
         self.run()
+        self.driver.find_element(By.XPATH, self.MAIL_BUTTON_ID).click()
+        self.driver.find_element(By.XPATH, self.FORM_BUTTON_ID).click()
+        self.get_time_sleep()
+        self.state = True
+
         self.get_screen_shot()
         self.driver.quit()
 

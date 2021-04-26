@@ -27,7 +27,7 @@ class AutoHealthJob:
     SIGN_IN_PASSWORD_ID = "i0118"
     SIGN_IN_BUTTON_ID = "idSIButton9"
     SIGN_IN_STATE_ID = "idBtn_Back"
-    FORM_TEXT_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[1]/div/div[2]/div/div/input'
+    FORM_TEXT_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div/div[1]/div/div[2]/div/div/input'
     FORM_2_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div/label/input'
     FORM_3_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div[2]/div/div[1]/div/label/input'
     FORM_4_ID = '//*[@id="form-container"]/div/div/div/div/div[1]/div[2]/div[2]/div[4]/div/div[2]/div/div[2]/div/label/input'
@@ -66,19 +66,19 @@ class AutoHealthJob:
 
         # Enter your email address
         element = self.driver.find_element(By.ID, self.SIGN_IN_EMAIL_ID)
-        if os.environ['MICROSOFT_EMAIL'] is None:
-            element.send_keys(MICROSOFT_EMAIL)
-        else:
+        if MICROSOFT_EMAIL is None:
             element.send_keys(os.environ['MICROSOFT_EMAIL'])
+        else:
+            element.send_keys(MICROSOFT_EMAIL)
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
 
         # Enter your password
         element = self.driver.find_element(By.ID, self.SIGN_IN_PASSWORD_ID)
-        if os.environ['MICROSOFT_PASSWORD'] is None:
-            element.send_keys(MICROSOFT_PASSWORD)
-        else:
+        if MICROSOFT_PASSWORD is None:
             element.send_keys(os.environ['MICROSOFT_PASSWORD'])
+        else:
+            element.send_keys(MICROSOFT_PASSWORD)
         self.driver.find_element(By.ID, self.SIGN_IN_BUTTON_ID).click()
         self.get_time_sleep()
 

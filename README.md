@@ -6,7 +6,7 @@
 
 ## Prerequisites
 
-OS: Linux Mint 19.1 Cinnamon <br>
+OS: Arch Linux <br>
 Python: Python3.7.0
 
 ## Usage

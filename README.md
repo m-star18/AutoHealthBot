@@ -7,7 +7,7 @@
 ## Prerequisites
 
 OS: Arch Linux <br>
-Python: Python3.7.0
+Python3.9.5
 
 ## Usage
 
